@@ -358,8 +358,10 @@ src/bin/BuiltHamcoreFiles/unix/hamcore.se2: tmp/hamcorebuilder $(HAMCORE_FILES)
 
 # hamcorebuilder Utility
 tmp/hamcorebuilder: src/hamcorebuilder/hamcorebuilder.c $(HEADERS_MAYAQUA) $(HEADERS_CEDAR) $(OBJECTS_MAYAQUA) $(OBJECTS_CEDAR)
+ifneq ($(STATIC),YES)
 	@mkdir -p tmp/
 	$(CC) $(OPTIONS_COMPILE) $(OBJECTS_MAYAQUA) $(OBJECTS_CEDAR) src/hamcorebuilder/hamcorebuilder.c $(OPTIONS_LINK) -o tmp/hamcorebuilder
+endif
 
 # vpnserver
 bin/vpnserver/vpnserver: tmp/as/vpnserver.a bin/vpnserver/hamcore.se2 $(HEADERS_MAYAQUA) $(HEADERS_CEDAR) $(OBJECTS_MAYAQUA) $(OBJECTS_CEDAR)
